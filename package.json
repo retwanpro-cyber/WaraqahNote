@@ -1,0 +1,69 @@
+{
+  "name": "waraqah-note",
+  "version": "1.0.0",
+  "description": "تطبيق ورقة نوت - تدوين ملاحظات سريع وبدون إنترنت لويندوز 10 و 11",
+  "main": "electron/main.cjs",
+  "author": "Radwan Almsora",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:dev": "concurrently \"vite\" \"wait-on tcp:3000 && electron electron/main.cjs\"",
+    "build:msix": "npm run build && electron-builder --win appx --x64",
+    "build:exe": "npm run build && electron-builder --win nsis portable --x64"
+  },
+  "dependencies": {
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "concurrently": "^9.1.0",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.1.0",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "RadwanAlmsora.WaraqahNote",
+    "productName": "WaraqahNote",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "win": {
+      "target": [
+        "appx",
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "appx": {
+      "applicationId": "RadwanAlmsora.WaraqahNote",
+      "identityName": "RadwanAlmsora.WaraqahNote",
+      "publisher": "CN=DB86E487-92CC-4FB9-BDBC-F161416E3A4E",
+      "publisherDisplayName": "Radwan Almsora",
+      "displayName": "WaraqahNote",
+      "backgroundColor": "#0f172a",
+      "showNameOnTiles": true
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "WaraqahNote"
+    }
+  }
+}
